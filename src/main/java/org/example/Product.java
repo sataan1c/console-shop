@@ -1,0 +1,59 @@
+package org.example;
+
+public class Product {
+    private int id;
+    private String nameOfProduct;
+    private double price;
+    private String category;
+    private int quantity;
+
+    public Product(int id, String nameOfProduct, int price, String category, int quantity) {
+        this.id = id;
+        this.nameOfProduct = nameOfProduct;
+        this.price = price;
+        this.category = category;
+        this.quantity = quantity;
+    }
+
+    public String getNameOfProduct() {
+        return nameOfProduct;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int decreaseQuantity() {return --quantity;}
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+
+        if(o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+        return id == product.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
+    }
+
+    @Override
+    public String toString() {
+        return id + ". " + nameOfProduct +
+                " | $" + price +
+                " | Category: " + category +
+                " | In stock: " + quantity;
+    }
+
+}
