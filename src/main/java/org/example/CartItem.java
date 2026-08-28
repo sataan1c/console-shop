@@ -9,12 +9,12 @@ public class CartItem {
         this.quantity = quantity;
     }
 
-    public int increaseQuantity() {
-        return this.quantity++;
+    public void increaseQuantity() {
+        ++this.quantity;
     }
 
-    public int decreaseQuantity() {
-        return --this.quantity;
+    public void decreaseQuantity() {
+        --this.quantity;
     }
 
     public Product getProduct() {

@@ -20,10 +20,6 @@ public class Store {
         }
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
     public Product findProductById(int id) {
         for(Product p : products) {
             if (p.getId() == id) {

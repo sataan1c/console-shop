@@ -31,10 +31,16 @@ public class Product {
         return id;
     }
 
-    public int decreaseQuantity() {return --quantity;}
+    public void decreaseQuantity() {
+        if(this.quantity > 0) {
+            --quantity;
+        }
+    }
 
     public void increaseQuantity(int quantity) {
-        this.quantity += quantity;
+        if(quantity > 0) {
+            this.quantity += quantity;
+        }
     }
 
     @Override
