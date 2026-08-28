@@ -40,9 +40,11 @@ public class Cart {
 
             if(product.equals(c.getProduct())) {
                 if(c.getQuantity() == 1) {
+                    product.increaseQuantity(1);
                     iterator.remove();
                 } else if(c.getQuantity() > 1) {
                     c.decreaseQuantity();
+                    product.increaseQuantity(1);
                 }
             }
         }
@@ -55,6 +57,7 @@ public class Cart {
             CartItem c = iterator.next();
 
             if(product.equals(c.getProduct())) {
+                product.increaseQuantity(c.getQuantity());
                 iterator.remove();
             }
         }

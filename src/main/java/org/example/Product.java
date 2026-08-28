@@ -33,6 +33,10 @@ public class Product {
 
     public int decreaseQuantity() {return --quantity;}
 
+    public void increaseQuantity(int quantity) {
+        this.quantity += quantity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if(this == o) return true;
