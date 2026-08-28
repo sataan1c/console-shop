@@ -110,7 +110,12 @@ public class Main {
                     break;
 
                 case 6:
-                    Order order = cart.checkout();
+                    try {
+                        Order order = cart.checkout();
+                        order.showOrder();
+                    } catch(IllegalStateException e) {
+                        System.out.println(e.getMessage());
+                    }
 
                     break;
 

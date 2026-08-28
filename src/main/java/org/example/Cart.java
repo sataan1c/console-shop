@@ -66,10 +66,19 @@ public class Cart {
     public Order checkout() {
         Order order = new Order();
 
+        if(items.isEmpty()) {
+            throw new IllegalStateException("Cannot checkout an empty cart.");
+        }
+
         for(CartItem c : items) {
-            OrderItem item = new OrderItem(c.getProduct(), c.getQuantity(), c.getProduct().getPrice());
+            OrderItem item = new OrderItem(c.getProduct().getId(),
+                    c.getProduct().getNameOfProduct(),
+                    c.getQuantity(),
+                    c.getProduct().getPrice());
             order.addItem(item);
         }
+
+        items.clear();
 
         return order;
     }
