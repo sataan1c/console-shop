@@ -1,32 +1,26 @@
 package org.example;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Store {
-    private List<Product> products;
+    private final ProductDao productDao = new ProductDao();
 
     public Store() {
-        products = new ArrayList<>();
     }
 
-    public void addProduct(Product product) {
-        products.add(product);
-    }
+//    public void addProduct(Product product) { // перенести в ProductDao
+//        products.add(product);
+//    }
 
-    public void showProduct() {
-        for(Product p : products) {
+    public void showProduct() throws SQLException {
+        for (Product p : productDao.findAll()) {
             System.out.println(p);
         }
     }
 
-    public Product findProductById(int id) {
-        for(Product p : products) {
-            if (p.getId() == id) {
-                return p;
-            }
-        }
-
-        return null;
+    public Product findProductById(int id) throws SQLException {
+        return productDao.findProductById(id);
     }
 }
