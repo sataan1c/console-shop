@@ -10,9 +10,9 @@ public class Store {
     public Store() {
     }
 
-//    public void addProduct(Product product) { // перенести в ProductDao
-//        products.add(product);
-//    }
+    public void insertProduct(Product product) throws SQLException {
+        productDao.insertProduct(product);
+    }
 
     public void showProduct() throws SQLException {
         for (Product p : productDao.findAll()) {

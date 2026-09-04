@@ -24,6 +24,22 @@ public class Main {
             System.out.println("Ошибка при получении товаров: " + e.getMessage());
         }
 
+        try {
+            Product product = new Product(10, "Java Head First", 25, "Book", 20);
+            productDao.insertProduct(product);
+            System.out.println("Продукт был успешно добавлен.");
+        } catch (SQLException e) {
+            System.out.println("Ошибка при добавлении товара: " + e.getMessage());
+        }
+
+        try {
+            Product product = new Product(11, "Glasses", 50, "Health", 1);
+            productDao.insertProduct(product);
+            System.out.println("Продукт был успешно добавлен.");
+        } catch (SQLException e) {
+            System.out.println("Ошибка при добавлении товара: " + e.getMessage());
+        }
+
 
 //        Scanner keyboard = new Scanner(System.in);
 //        Store store = new Store();

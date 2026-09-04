@@ -70,15 +70,24 @@ public class ProductDao {
         String sql = "INSERT INTO products (name, price, category_id, quantity) " +
                 "VALUES (?, ?, ?, ?)";
 
+        CategoryDao category = new CategoryDao();
+        Integer categoryId = category.findIdByName(product.getCategory());
+
+        if(categoryId == null) {
+            throw new SQLException("Категория не найдена: " + product.getCategory());
+        }
+
         try(Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setString(1, product.getNameOfProduct());
             statement.setDouble(2, product.getPrice());
-            statement.setInt(3, product.getId());
+            statement.setInt(3, categoryId);
             statement.setInt(4, product.getQuantity());
 
-            statement.executeQuery();
+            statement.executeUpdate();
+
+
         }
     }
 }

@@ -31,6 +31,8 @@ public class Product {
         return id;
     }
 
+    public String getCategory() {return category; }
+
     public void decreaseQuantity() {
         if(this.quantity > 0) {
             --quantity;
