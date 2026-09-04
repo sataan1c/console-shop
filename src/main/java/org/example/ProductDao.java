@@ -10,9 +10,9 @@ import java.util.List;
 
 
 public class ProductDao {
-    private static final String URL = "jdbc:postgresql://localhost:5432/console_shop";
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "postgres";
+        private static final String URL = "jdbc:postgresql://localhost:5432/console_shop";
+        private static final String USER = "postgres";
+        private static final String PASSWORD = "postgres";
 
     public List<Product> findAll() throws SQLException {
         List<Product> products = new ArrayList<>();
@@ -63,6 +63,22 @@ public class ProductDao {
             }
 
             return null;
+        }
+    }
+
+    public void insertProduct(Product product) throws SQLException {
+        String sql = "INSERT INTO products (name, price, category_id, quantity) " +
+                "VALUES (?, ?, ?, ?)";
+
+        try(Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, product.getNameOfProduct());
+            statement.setDouble(2, product.getPrice());
+            statement.setInt(3, product.getId());
+            statement.setInt(4, product.getQuantity());
+
+            statement.executeQuery();
         }
     }
 }
