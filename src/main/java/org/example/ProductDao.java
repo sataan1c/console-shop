@@ -10,9 +10,9 @@ import java.util.List;
 
 
 public class ProductDao {
-        private static final String URL = "jdbc:postgresql://localhost:5432/console_shop";
-        private static final String USER = "postgres";
-        private static final String PASSWORD = "postgres";
+    private static final String URL = "jdbc:postgresql://localhost:5432/console_shop";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "postgres";
 
     public List<Product> findAll() throws SQLException {
         List<Product> products = new ArrayList<>();
@@ -20,11 +20,11 @@ public class ProductDao {
                 "FROM products p " +
                 "JOIN categories c ON p.category_id = c.id";
 
-        try(Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery()) {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(sql);
+             ResultSet resultSet = statement.executeQuery()) {
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
                 double price = resultSet.getDouble("price");
@@ -44,13 +44,13 @@ public class ProductDao {
                 "JOIN categories c ON p.category_id = c.id " +
                 "WHERE p.id = ? ";
 
-        try(Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setInt(1, id);
 
             try (ResultSet resultSet = statement.executeQuery()) {
-                while(resultSet.next()) { // можно потом заменить на if
+                while (resultSet.next()) { // можно потом заменить на if
                     id = resultSet.getInt("id");
                     String name = resultSet.getString("name");
                     double price = resultSet.getDouble("price");
@@ -73,12 +73,12 @@ public class ProductDao {
         CategoryDao category = new CategoryDao();
         Integer categoryId = category.findIdByName(product.getCategory());
 
-        if(categoryId == null) {
+        if (categoryId == null) {
             throw new SQLException("Категория не найдена: " + product.getCategory());
         }
 
-        try(Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setString(1, product.getNameOfProduct());
             statement.setDouble(2, product.getPrice());
@@ -88,6 +88,21 @@ public class ProductDao {
             statement.executeUpdate();
 
 
+        }
+    }
+
+    public void updateQuantity(int id, int newQuantity) throws SQLException {
+        String sql = "UPDATE products " +
+                "SET quantity = ? " +
+                "WHERE id = ? ";
+
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, newQuantity);
+            statement.setInt(2, id);
+
+            statement.executeUpdate();
         }
     }
 }

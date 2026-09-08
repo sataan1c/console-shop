@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Store {
     private final ProductDao productDao = new ProductDao();
+    private final OrderDao orderDao = new OrderDao();
 
     public Store() {
     }
@@ -22,5 +23,9 @@ public class Store {
 
     public Product findProductById(int id) throws SQLException {
         return productDao.findProductById(id);
+    }
+
+    public int insertOrder(int customerId, List<CartItem> items) throws SQLException {
+        return orderDao.insertOrder(customerId, items);
     }
 }

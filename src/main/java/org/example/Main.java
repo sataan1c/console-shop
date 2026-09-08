@@ -12,150 +12,51 @@ public class Main {
         ProductDao productDao = new ProductDao();
         Store store = new Store();
 
+        try{
+            Product product = store.findProductById(4);
+            CartItem item = new CartItem(product, 1 );
 
-        try {
-            List<Product> products = productDao.findAll();
-            Product currentProduct = store.findProductById(2);
-            System.out.println(currentProduct);
-            for(Product product : products) {
-                System.out.println(product);
-            }
-        } catch (SQLException e) {
-            System.out.println("Ошибка при получении товаров: " + e.getMessage());
-        }
+            List<CartItem> items = new ArrayList<>();
+            items.add(item);
 
-        try {
-            Product product = new Product(10, "Java Head First", 25, "Book", 20);
-            productDao.insertProduct(product);
-            System.out.println("Продукт был успешно добавлен.");
+            int orderId = store.insertOrder(1, items);
+            System.out.println("Заказ создан, id = " + orderId);
         } catch (SQLException e) {
-            System.out.println("Ошибка при добавлении товара: " + e.getMessage());
-        }
-
-        try {
-            Product product = new Product(11, "Glasses", 50, "Health", 1);
-            productDao.insertProduct(product);
-            System.out.println("Продукт был успешно добавлен.");
-        } catch (SQLException e) {
-            System.out.println("Ошибка при добавлении товара: " + e.getMessage());
+            System.out.println("Ошибка при оформлении заказа: " + e.getMessage());
         }
 
 
-//        Scanner keyboard = new Scanner(System.in);
-//        Store store = new Store();
-//        Cart cart = new Cart();
-//
-//        Product book = new Product(1,
-//                "Song of the ice and wind",
-//                50,
-//                "Book",
-//                5);
-//
-//        Product laptop = new Product(2,
-//                "Macbook",
-//                1000,
-//                "IT",
-//                10);
-//
-//        Product mouse = new Product(3,
-//                "Logitech G102",
-//                20,
-//                "IT",
-//                4);
-//
-//        Product book1 = new Product(4,
-//                "Miyamoto Musashi",
-//                10,
-//                "Book",
-//                2);
-//
-//        store.addProduct(book);
-//        store.addProduct(laptop);
-//        store.addProduct(mouse);
-//        store.addProduct(book1);
-//
-//        while (true) {
-//            int productId;
-//            System.out.println(" ========================\n JAVA SHOP\n ======================== ");
-//            System.out.println(" 1. Show products\n" +
-//                    " 2. Add products to cart\n" +
-//                    " 3. Show cart\n" +
-//                    " 4. Decrease quantity\n" +
-//                    " 5. Remove product\n" +
-//                    " 6. Checkout\n" +
-//                    " 0. Exit"
-//            );
-//
-//            int usersChoice = keyboard.nextInt();
-//
-//            switch (usersChoice) {
-//                case 1:
-//                    store.showProduct();
-//                    break;
-//                case 2:
-//                    System.out.println("Enter product id: ");
-//                    productId = keyboard.nextInt();
-//                    Product currentProduct = store.findProductById(productId);
-//
-//                    if(currentProduct == null) {
-//                        System.out.println("Product not found.");
-//                        break;
-//                    }
-//
-//                    cart.addProduct(currentProduct);
-//                    cart.showCart();
-//
-//                    break;
-//
-//                case 3:
-//                    cart.showCart();
-//
-//                    break;
-//
-//                case 4:
-//                    System.out.println("Enter product id: ");
-//                    productId = keyboard.nextInt();
-//
-//                    currentProduct = store.findProductById(productId);
-//
-//                    if(currentProduct == null) {
-//                        System.out.println("Product not found.");
-//                        break;
-//                    }
-//
-//                    cart.decreaseQuantity(currentProduct);
-//
-//                    break;
-//
-//                case 5:
-//                    System.out.println("Enter product id: ");
-//                    productId = keyboard.nextInt();
-//
-//                    currentProduct = store.findProductById(productId);
-//
-//                    if(currentProduct == null) {
-//                        System.out.println("Product not found.");
-//                        break;
-//                    }
-//
-//                    cart.removeItem(currentProduct);
-//
-//                    break;
-//
-//                case 6:
-//                    try {
-//                        Order order = cart.checkout();
-//                        order.showOrder();
-//                    } catch(IllegalStateException e) {
-//                        System.out.println(e.getMessage());
-//                    }
-//
-//                    break;
-//
-//                case 0:
-//                    return;
-//
+//        try {
+//            List<Product> products = productDao.findAll();
+//            Product currentProduct = store.findProductById(2);
+//            System.out.println(currentProduct);
+//            for(Product product : products) {
+//                System.out.println(product);
 //            }
+//        } catch (SQLException e) {
+//            System.out.println("Ошибка при получении товаров: " + e.getMessage());
+//        }
+//
+//        try {
+//            Product product = new Product(10, "Java Head First", 25, "Book", 20);
+//            productDao.insertProduct(product);
+//            System.out.println("Продукт был успешно добавлен.");
+//        } catch (SQLException e) {
+//            System.out.println("Ошибка при добавлении товара: " + e.getMessage());
+//        }
+//
+//        try {
+//            Product product = new Product(11, "Glasses", 50, "Health", 1);
+//            productDao.insertProduct(product);
+//            System.out.println("Продукт был успешно добавлен.");
+//        } catch (SQLException e) {
+//            System.out.println("Ошибка при добавлении товара: " + e.getMessage());
+//        }
+
+//        try{
+//            productDao.updateQuantity(6, 40);
+//        } catch (SQLException e) {
+//            System.out.println("Не удалось обновить количество товара на складе: " + e.getMessage());
 //        }
     }
 }
