@@ -25,38 +25,5 @@ public class Main {
             System.out.println("Ошибка при оформлении заказа: " + e.getMessage());
         }
 
-
-//        try {
-//            List<Product> products = productDao.findAll();
-//            Product currentProduct = store.findProductById(2);
-//            System.out.println(currentProduct);
-//            for(Product product : products) {
-//                System.out.println(product);
-//            }
-//        } catch (SQLException e) {
-//            System.out.println("Ошибка при получении товаров: " + e.getMessage());
-//        }
-//
-//        try {
-//            Product product = new Product(10, "Java Head First", 25, "Book", 20);
-//            productDao.insertProduct(product);
-//            System.out.println("Продукт был успешно добавлен.");
-//        } catch (SQLException e) {
-//            System.out.println("Ошибка при добавлении товара: " + e.getMessage());
-//        }
-//
-//        try {
-//            Product product = new Product(11, "Glasses", 50, "Health", 1);
-//            productDao.insertProduct(product);
-//            System.out.println("Продукт был успешно добавлен.");
-//        } catch (SQLException e) {
-//            System.out.println("Ошибка при добавлении товара: " + e.getMessage());
-//        }
-
-//        try{
-//            productDao.updateQuantity(6, 40);
-//        } catch (SQLException e) {
-//            System.out.println("Не удалось обновить количество товара на складе: " + e.getMessage());
-//        }
     }
 }
